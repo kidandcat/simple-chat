@@ -7,7 +7,7 @@ var http = require('http');
 var app = express();
 var httpServer = http.createServer(app);
 
-httpServer.listen(80);
+httpServer.listen(8002);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
