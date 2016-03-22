@@ -7285,8 +7285,8 @@ var chat = new Vue({
 
 var socket = io('192.168.0.20:8080');
 
-function chatLogin(nick){
-    socket.emit('chat:login', { nick: nick });
+function chatLogin(nick, sala){
+    socket.emit('chat:login', { nick: nick, room: sala });
 }
 
 function chatSend(msg){
