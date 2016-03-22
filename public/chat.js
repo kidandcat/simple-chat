@@ -7283,7 +7283,7 @@ var chat = new Vue({
     }
 });
 
-var socket = io('192.168.0.20:8080');
+var socket = io('janus.netelip.com:8080');
 
 function chatLogin(nick, sala){
     socket.emit('chat:login', { nick: nick, room: sala });
