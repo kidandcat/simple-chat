@@ -6,11 +6,12 @@ io.on('connect', function(socket){
         console.log(data);
         socket.nick = data.nick;
         socket.join(data.room);
+        socket.room = data.room;
     })
     
     socket.on('chat:msg', function(data){
         console.log(data);
         data.nick = socket.nick;
-        socket.broadcast.emit('chat:msg', data);
+        socket.broadcast.to(socket.room).emit('chat:msg', data);
     })
 });
