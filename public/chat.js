@@ -7254,6 +7254,35 @@ function toArray(list, index) {
 
 
 
+var chat = new Vue({
+    el: '#chat',
+    data: {
+        newMsg: '',
+        messages: [
+
+        ]
+    },
+    methods: {
+        addMsg: function(msg, user, me) {
+            this.messages.push({ text: msg, user: user, me: (me)?me:false });
+            if(me){
+                this.sendMsg(msg);
+            }
+            setTimeout(function(){document.querySelector('#chat #area').scrollTop = document.querySelector('#chat #area').scrollHeight}, 200);
+        },
+        sendMsg: function(msg) {
+            chatSend(msg);
+        },
+        myMsg: function() {
+            var msg = this.newMsg.trim();
+            if (msg) {
+                this.addMsg(msg, 'Yo', true);
+            }
+            this.newMsg = '';
+        }
+    }
+});
+
 var socket = io('192.168.0.20:8080');
 
 function chatLogin(nick){
@@ -7265,6 +7294,6 @@ function chatSend(msg){
 }
 
 socket.on('chat:msg', function(data){
-    chatNewMsg(data);
+    chat.addMsg(data.msg, data.nick, false);
 });
 

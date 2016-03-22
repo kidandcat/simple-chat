@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="/chat.js"></script>
+    <script src="/vue.js"></script>
     <style>
         #chat {
             width: 100%;
@@ -68,15 +68,33 @@
 </head>
 
 <body>
+    
     <div id="chat">
         <div id="area">
+            <template v-for="message in messages">
+                <div v-if="message.me" class="msg-block yo">
+                    <span class="message">
+                        {{ message.text }}
+                    </span>
+                    <span class="user">
+                        {{ message.user }}
+                    </span>
+                </div>
+                <div v-else class="msg-block">
+                    <span class="user">
+                        {{ message.user }}
+                    </span>
+                    <span class="message">
+                        {{ message.text }}
+                    </span>
+                </div>
+            </template>
         </div>
-        <div id="controls">
-            <input type="text" id="chat-input">
-            <button onclick="send()">></button>
-        </div>
-        <script src="/chat-control.js"></script>
+        <input v-model="newMsg" v-on:keyup.enter="myMsg">
+        <button v-on:click="myMsg">></button>
     </div>
+
+    <script src="/chat.js"></script>
 </body>
 
 </html>
